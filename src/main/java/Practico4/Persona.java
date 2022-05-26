@@ -2,19 +2,14 @@ package Practico4;
 
 public class Persona {
     private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private int telefono;
+    private String apellido;
     private int edad;
-    private String correo;
 
-    public Persona(String nombre, String apellidoPaterno, String apellidoMaterno, int telefono, int edad, String correo) {
+
+    public Persona(String nombre, String apellido, int edad) {
         this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.telefono = telefono;
+        this.apellido = apellido;
         this.edad = edad;
-        this.correo = correo;
     }
 
     public String getNombre() {
@@ -25,28 +20,12 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public int getEdad() {
@@ -57,11 +36,4 @@ public class Persona {
         this.edad = edad;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
 }

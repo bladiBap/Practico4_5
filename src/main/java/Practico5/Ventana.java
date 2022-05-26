@@ -45,7 +45,6 @@ public class Ventana extends JFrame {
     }
 
     protected void menuArchivo_cargarImagen() {
-        //modelo.leerDeArchivo("D:\\Criptos\\CriptoGodFather Collection\\01_04_07.png");
         JFileChooser fileChooser = new JFileChooser();
         int respuesta = fileChooser.showOpenDialog(null);
         if (respuesta == JFileChooser.APPROVE_OPTION) {
