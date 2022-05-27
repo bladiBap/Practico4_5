@@ -9,17 +9,19 @@ public class ConvertirPixel extends Convertir {
         int[][] pixeles = imagen.getPixeles();
         for (int i = x1; i < x2; i+=3) {
             for (int j = y1; j < y2; j+=3) {
-                int c = pixeles[i][j];
+                int a = pixeles[i][j];
 
-                int r = (c >> 16) & 0xff;
 
-                c = (r << 16);
-                //int gris = (r + g + b) / 3;
-                //int gris = (int)(((double)r + (double)g + (double)b) / 3.0);
 
-                //int intGris = gris & (gris << 8) & (gris << 16);
-                //int intGris = gris + gris * 256 + gris * 256*256;
-                imagen.setColor(c, i, j);
+                imagen.setColor(a, i, j);
+                imagen.setColor(a, i+1, j);
+                imagen.setColor(a, i+2, j);
+                imagen.setColor(a, i, j+1);
+                imagen.setColor(a, i+1, j+1);
+                imagen.setColor(a, i+2, j+1);
+                imagen.setColor(a, i, j+2);
+                imagen.setColor(a, i+1, j+2);
+                imagen.setColor(a, i+2, j+2);
             }
         }
         imagen.transformada();

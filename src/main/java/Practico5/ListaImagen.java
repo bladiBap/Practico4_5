@@ -1,11 +1,12 @@
-package Practico4;
+package Practico5;
 
 import java.util.Iterator;
 
-public class Lista<E> implements Iterable<E> {
+public class ListaImagen<E> implements Iterable<E> {
     protected Nodo<E> raiz;
     protected int cantidad;
-    public Lista() {
+
+    public ListaImagen() {
 
         this.raiz = null;
         cantidad = 0;
@@ -83,6 +84,13 @@ public class Lista<E> implements Iterable<E> {
     }
 
     public int tamano() {
+        /*Nodo<E> actual = raiz;
+        int resultado = 0;
+        while(actual != null) {
+            resultado++;
+            actual = actual.getSiguiente();
+        }
+        return resultado;*/
         return this.cantidad;
     }
 

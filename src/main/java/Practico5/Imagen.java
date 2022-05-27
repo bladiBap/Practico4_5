@@ -1,4 +1,5 @@
 package Practico5;
+import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,21 +10,28 @@ import java.io.IOException;
 
 public class Imagen {
     private PropertyChangeSupport cambios;
+    private static final org.apache.log4j.Logger logger = Logger.getRootLogger();
+    private int pos = 0;
+
     protected int[][] pixeles;
+
+    private ListaImagen <int[][]> listaImagen = new ListaImagen<>();
+
     private String path;
     protected int ancho;
     protected int alto;
-/*
-    public Imagen(int w, int h) {
-        cambios = new PropertyChangeSupport(this);
-        initImagen(w,h);
-    }
 
- */
     public Imagen (String path){
         cambios = new PropertyChangeSupport(this);
         this.path = path;
         leerDeArchivo(this.path);
+        int[][] pixelesAux =new int[ancho][alto] ;
+        for (int i = 0; i < ancho; i++) {
+            for (int j = 0; j < alto; j++) {
+                pixelesAux [i][j] = pixeles[i][j];
+            }
+        }
+        listaImagen.adicionar(pixelesAux);
 
     }
 
@@ -36,10 +44,6 @@ public class Imagen {
         for (int j = 0; j < alto; j++) {
             for (int i = 0; i < ancho; i++) {
                 int bgr = bi.getRGB(i, j);
-                /*int red = (bgr >> 16) & 0x000000ff;
-                int green = (bgr & 0x0000ff00);
-                int blue = (bgr & 0x000000ff) << 16;
-                pixeles[i][j] = blue | green | red;*/
                 pixeles[i][j] = bgr;
             }
         }
@@ -55,6 +59,7 @@ public class Imagen {
             }
         }
 
+
     }
 
 
@@ -66,6 +71,10 @@ public class Imagen {
 
     public int getAncho() {
         return ancho;
+    }
+
+    public void setPixeles(int[][] pixeles) {
+        this.pixeles = pixeles;
     }
 
     public void setAncho(int ancho) {
@@ -110,4 +119,40 @@ public class Imagen {
     public void transformada() {
         cambios.firePropertyChange("IMAGEN", 1, 0);
     }
+
+    public void cambio (){
+        int[][] pixelesAux =new int[ancho][alto] ;
+        for (int i = 0; i < ancho; i++) {
+            for (int j = 0; j < alto; j++) {
+                pixelesAux [i][j] = pixeles[i][j];
+            }
+        }
+        listaImagen.adicionar(pixelesAux);
+        this.pos = pos+1;
+        logger.info("Tamaño: "+listaImagen.tamano()+"  la posicion es: "+ this.pos);
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void masPos(int pos) {
+        this.pos = this.pos+pos;
+        if(this.pos>listaImagen.tamano()-1){
+            this.pos = listaImagen.tamano()-1;
+        }
+        logger.info("PosicionAumentado: "+this.pos);
+    }
+    public void menosPos(int pos) {
+        this.pos = this.pos-pos;
+        if(this.pos<0){
+            this.pos = 0;
+        }
+        logger.info("PosicionRestado: "+this.pos);
+    }
+
+    public void moverImagenes (){
+        pixeles = listaImagen.obtener(pos);}
+
 }
+

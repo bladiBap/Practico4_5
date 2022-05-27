@@ -9,7 +9,12 @@ import java.awt.event.ActionListener;
 
 public class VentanaEmergente extends JFrame implements ActionListener {
     private static final org.apache.log4j.Logger logger = Logger.getRootLogger();
+
+    //private ListaImagen <int [][]> listaImagen = new ListaImagen<>();
+    //private ListaImagen <Imagen> listaImagen1 = new ListaImagen<>();
     private Imagen modelo;
+
+    private Imagen mod;
     private int posx1;
     private int posy1;
     private int posx2;
@@ -17,11 +22,14 @@ public class VentanaEmergente extends JFrame implements ActionListener {
 
 
     private JButton pixelado = new JButton("Pixelado");
+
     private JButton suavizado = new JButton("Suavizado");
     private JButton espejoH = new JButton("Espejo Horizontal");
     private JButton tonosGris = new JButton("Tono de Gris");
     private JButton tonosRojos = new JButton("Tonos Rojos");
     private JButton tonosVerde = new JButton("Tonos Verdes");
+    private JButton Atras = new JButton("Atras");
+    private JButton Adelante = new JButton("Adelante");
 
     public VentanaEmergente (Imagen imagen,int x1, int y1,int x2,int y2){
         this.posx1 = x1;
@@ -47,6 +55,9 @@ public class VentanaEmergente extends JFrame implements ActionListener {
         tonosGris.addActionListener(this);
         tonosRojos.addActionListener(this);
         tonosVerde.addActionListener(this);
+        Atras.addActionListener(this);
+        Adelante.addActionListener(this);
+        //System.out.println("asdasdasdasdasdasdasdas :    "+listaImagen1.tamano());
 
         pixelado.setBounds(130,30,120,30);
         suavizado.setBounds(130,75,120,30);
@@ -54,6 +65,8 @@ public class VentanaEmergente extends JFrame implements ActionListener {
         tonosGris.setBounds(130,155,120,30);
         tonosRojos.setBounds(130,195,120,30);
         tonosVerde.setBounds(130,230,120,30);
+        Atras.setBounds(70,265,120,30);
+        Adelante.setBounds(230,265,120,30);
 
         this.add(pixelado);
         this.add(suavizado);
@@ -61,17 +74,24 @@ public class VentanaEmergente extends JFrame implements ActionListener {
         this.add(tonosGris);
         this.add(tonosRojos);
         this.add(tonosVerde);
+        this.add(Atras);
+        this.add(Adelante);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getSource().equals(pixelado)){
             ConvertirPixel cov = new ConvertirPixel(modelo);
             cov.transformar(posx1, posy1,posx2,posy2);
+            modelo.cambio();
             System.out.println(1);
             this.dispose();
         }
         if (e.getSource().equals(suavizado)){
+            ConvertirSuavizado cov = new ConvertirSuavizado(modelo);
+            cov.transformar(posx1, posy1,posx2,posy2);
+            modelo.cambio();
             System.out.println(2);
             this.dispose();
         }
@@ -79,6 +99,7 @@ public class VentanaEmergente extends JFrame implements ActionListener {
             System.out.println(3);
             ConvertirRotarHorizontal cov = new ConvertirRotarHorizontal(modelo);
             cov.transformar(posx1, posy1,posx2,posy2);
+            modelo.cambio();
             this.dispose();
         }
         if (e.getSource().equals(tonosGris)){
@@ -86,19 +107,37 @@ public class VentanaEmergente extends JFrame implements ActionListener {
 
             ConvertirGris cov = new ConvertirGris(modelo);
             cov.transformar(posx1, posy1,posx2,posy2);
+            modelo.cambio();
             this.dispose();
         }
         if (e.getSource().equals(tonosRojos)){
             System.out.println(5);
             ConvertirRojo cov = new ConvertirRojo(modelo);
             cov.transformar(posx1, posy1,posx2,posy2);
+            modelo.cambio();
             this.dispose();
         }
         if (e.getSource().equals(tonosVerde)){
             System.out.println(5);
             ConvertirVerde cov = new ConvertirVerde(modelo);
             cov.transformar(posx1, posy1,posx2,posy2);
+            modelo.cambio();
+            this.dispose();
+        }
+        if (e.getSource().equals(Atras)){
+            int num = 1;
+            modelo.menosPos(num);
+            modelo.moverImagenes();
+            modelo.transformada();
+            this.dispose();
+        }
+        if (e.getSource().equals(Adelante)){
+            int num = 1;
+            modelo.masPos(num);
+            modelo.moverImagenes();
+            modelo.transformada();
             this.dispose();
         }
     }
+
 }

@@ -1,6 +1,8 @@
 package Practico5;
 
 
+import Practico4.Lista;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,8 @@ public class Ventana extends JFrame {
 
     private Imagen modelo;
     private PanelImagen panelImg;
+
+
     public Ventana (){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(new Dimension (600,400));

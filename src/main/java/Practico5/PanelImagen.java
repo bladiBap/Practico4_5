@@ -13,7 +13,6 @@ import java.beans.PropertyChangeListener;
 public class PanelImagen extends JPanel implements MouseListener, PropertyChangeListener {
 
     private static final org.apache.log4j.Logger logger = Logger.getRootLogger();
-
     private Imagen MiImagen;
     private int posx1;
     private int posy1;
